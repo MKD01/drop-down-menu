@@ -1,9 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const Dropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selected, setSelected] = useState("Select an option");
   const [arrowDirection, setArrowDirection] = useState("up");
+
+  const ref = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!ref.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+  }, [ref]);
 
   useEffect(() => {
     if (isDropdownOpen) {
@@ -22,16 +34,8 @@ const Dropdown = () => {
     handleDropdownClick();
   };
 
-  const handleDivClick = () => {
-    console.log("clicked");
-  };
-
   return (
-    <div
-      onFocus={() => console.log("focus")}
-      // className='dropdown-container'
-      className='check'
-    >
+    <div ref={ref}>
       <button id='dropdown-button' onClick={handleDropdownClick}>
         {selected}
         <i className={`arrow ${arrowDirection}`}></i>
@@ -85,10 +89,6 @@ const Dropdown = () => {
           <div className='underline'></div>
         </ul>
       )}
-      {/* <select id='' value={selected}>
-        <option value='The first option'>The first option</option>
-        <option value='Another on'>Another on</option>
-      </select> */}
     </div>
   );
 };
