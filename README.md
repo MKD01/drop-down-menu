@@ -11,7 +11,7 @@ A small challenge project to create a component for a drop down menu, from an im
 ---
 
 # **Setup / Installation Instructions**
-if you are interested in seeing/running this locally then please follow the below instructions:
+If you are interested in seeing/running this locally then please follow the below instructions:
 
 ### **Dependencies:**
 
